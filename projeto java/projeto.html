@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto</title>
+</head>
+<body>
+
+    <script>
+
+        var Produtocatagolo=[];
+
+        function ProgramaAdicionar(){
+            var nome = prompt("Digite o nome do produto:");
+            var preco = prompt("Digite o preço do produto:");
+            var descricao = prompt("Digite a descrição do produto:");
+            var quantidade = prompt("Digite a quantidade de produtos:");
+
+            var produto={
+                nome:nome,
+                preco:preco,
+                descricao:descricao,
+                quantidade:quantidade
+            };
+
+            Produtocatagolo.push(produto);
+            alert("Produto adicionado");
+        }
+        
+        function ProgramaBuscar(){
+            var Buscarnome = prompt("Digite o nome do produto da busca:");
+            var Encontrado = false;
+
+            Produtocatagolo.forEach(function(produto){
+                if(produto.nome === Buscarnome){
+                    alert(`Nome: ${produto.nome}, Preço: ${produto.preco}, Descrição: ${produto.descricao}, Quantidade: ${produto.quantidade}`);
+                    Encontrado = true;
+                }
+            });
+
+            if(Encontrado === false){
+                alert("Produto não foi encontrado, tente novamente.")
+            }
+        }
+
+        function ProgramaAtualizar(){
+            var Atualizarnome = prompt("Digite o nome do produto que deseja atualizar:");
+            var Produtoachado = false;
+
+            Produtocatagolo.forEach(function(produto){
+                if(produto.nome === Atualizarnome){
+                    
+                    produto.preco = parseFloat(prompt("Digite o preço atualizado:"));
+                    produto.descricao = prompt("Digite a descrição atualizado:");
+                    produto.quantidade = prompt("Digite a quantiade atualizada: ");
+
+                    Produtoachado = true;
+                    alert("Produto atualizado")
+                }
+            });
+
+            if(Produtoachado === false){
+                alert("Produto não encontrado!")
+            }
+        }
+
+        function ProgramaVizualizar(){
+            var Listaprograma = [];
+
+            Produtocatagolo.forEach(function(produto){
+                Listaprograma += `Nome: ${produto.nome}\nPreço: ${produto.preco}\nDescrição: ${produto.descricao}\nQuantidade: ${produto.quantidade}`;
+            });
+
+            alert(Listaprograma)
+        }
+
+        function ProgramaRemover(){
+            var Removernome = prompt("Digite o nome do produto que você quer remover: ");
+            var remover = -1;
+            
+            Produtocatagolo.forEach(function(produto, i){
+                if(produto.nome === Removernome){
+                    remover = i;
+                }
+            });
+                   
+            if(remover !== -1){
+                Produtocatagolo.splice(remover, 1);
+                alert("Removido com sucesso");
+            }else{
+                alert("Não encontrado");
+            }
+        }
+
+        function TelaExibir(){
+            var escolha;
+            do{
+                escolha = prompt('1 - Adicionar produto \n2 - Buscar produto \n3 - Atualizar os produtos \n4 - Visualizar todos os produtos \n5 - Remover o produto \n6 - Sair do programa');
+
+                if(escolha == "1"){
+                    ProgramaAdicionar();
+                }else if(escolha == "2"){
+                    ProgramaBuscar();
+                }else if(escolha == "3"){
+                    ProgramaAtualizar();
+                }else if(escolha == "4"){
+                    ProgramaVizualizar();
+                }else if(escolha == "5"){
+                    ProgramaRemover();
+                }else if(escolha !== "6"){
+                    alert("Opção não encontrada!");
+                }
+            }while(escolha !== "6");
+        }
+
+        TelaExibir();
+
+    </script>
+
+</body>
+</html>
